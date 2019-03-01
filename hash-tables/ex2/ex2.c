@@ -12,25 +12,24 @@ char **reconstruct_trip(Ticket **tickets, int length)
   // YOUR CODE HERE
   for(int i = 0; i < length; i++) {
 
-    int source = tickets[i]->source;
-    int destination = tickets[i]->destination;
+    char *source = tickets[i]->source;
+    char *destination = tickets[i]->destination;
 
     hash_table_insert(ht, source, destination);
 
   }
 
+  char *first = hash_table_retrieve(ht, "NONE");
+
+  route[0] = first;
+
   for(int j = 0; j < length; j++) {
 
-    int source = tickets[j]->source;
+    char *value = hash_table_retrieve(ht, route[j]);
 
-    if(strcmp(ht->storage[source], "NONE") == 0) {
-
-      char first = ht->storage[source]
-
-    } 
+    route[j+1] = value;
 
   }
-
 
   return route;
 }
