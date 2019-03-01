@@ -3,11 +3,46 @@
 #include "hashtable.h"
 #include "ex1.h"
 
+struct Answer *answer;
+
 Answer *get_indices_of_item_weights(int *weights, int length, int limit)
 {
   HashTable *ht = create_hash_table(16);
 
   // YOUR CODE HERE
+  //populate hashtable using input weights with the weight as the key and the index as the value
+  for(int i = 0; i < length; i++) {
+
+    hash_table_insert(ht, weights[i], i);
+
+  }
+
+  //check each weight minus the weight limit
+  for(int j = 0; j < length; j++) {
+
+    int weight = weights[j];
+    int key = (limit - weight);
+
+    //if the weight minus the weight limit exists in the ht, the higher index is index_1, and the lower index is index_2 
+    if( ht->storage[key] != NULL) {
+
+      int value = hash_table_retrieve(ht, key);
+
+      if(j > value) {
+
+        answer->index_1 = j;
+        answer->index_2 = value;
+        return answer;
+
+      } else {
+        answer->index_1 = value;
+        answer->index_2 = j;
+        return answer;
+      }
+
+    }
+
+  }
 
   return NULL;
 }
